@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {% javascripts '@AppBundle/Resources/public/js/bootbox.min.js'%}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="page-header">
+            <h1>Lista de Productos</h1>
+            <a href="{{ path('newproduct')}}" class="btn btn-primary right">Nuevo Producto</a>
+        </div>
+        <div class="table-responsive">
+            {% if products is not empty %}
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Descipción</th>
+                        <th>Marca</th>
+                        <th>Categoria</th>
+                        <th>Precio</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td>{{ product.code }}</td>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.description }}</td>
+                            <td>{{ product.trademark }}</td>
+                            <td>{{ product.category }}</td>
+                            <td>{{ product.price }}</td>
+                            <td>
+                                <a href="{{ path('editproduct',{id : product.id})}}">
+                                    <img src="{{ asset('bundles/app/images/edit.png') }}" width="15px" height="15px"/>
+                                </a>
+                            </td>
+                            <td>
+                                <a onclick="confirmDelete({{ product.id }})">
+                                    <img src="{{ asset('bundles/app/images/delete.png') }}" width="15px" height="15px"/>
+                                </a>
+                            </td>
+                        </tr>
+
+                    {%  endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-warning" role="alert">
+                    No existen productos.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function confirmDelete(id) {
+            bootbox.confirm({
+                message: "Desea eliminar el producto?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        window.location = {{ Routing.ge }}'delete/'+parseInt(id);
+                        return false;
+                    }
+
+                }
+            });
+        }
+    </script>
+
+{% endblock %}
