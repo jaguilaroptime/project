@@ -13,12 +13,21 @@ class ProductController extends Controller
     /**
      * @Route("/", name="listproduct")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $products = $this->getDoctrine()
             ->getRepository('AppBundle:Product')
-            ->findBy(array(),null,5,0);
-        return $this->render('products/index.html.twig',array('products'=>$products));
+            ->findAll();
+
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $products,
+            $request->query->getInt('page', 1),
+            5
+        );
+
+        return $this->render('products/index.html.twig',array('pagination'=>$pagination));
     }
 
     /**
@@ -31,7 +40,7 @@ class ProductController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             // perform some action...
             $p = $form->getData();
 
@@ -71,7 +80,7 @@ class ProductController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             // perform some action...
             $p = $form->getData();
 

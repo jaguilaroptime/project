@@ -20,7 +20,7 @@ class ProductType extends AbstractType
             ->add('trademark',TextType::class, array('label'=>'Marca'))
             ->add('category',TextType::class, array('label'=>'Categoria'))
             ->add('price',NumberType::class, array('label'=>'Precio'))
-            ->add('save', SubmitType::class, array('label' => 'Guardar'));
+            ->add('save', SubmitType::class, array('label' => 'Guardar','attr' => array('class' => 'btn btn-primary pull-right')));
     }
 
     public function configureOptions(OptionsResolver $resolver)

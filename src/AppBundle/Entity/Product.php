@@ -25,27 +25,59 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=20, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(
+     *     message="El Código es un campo obligatorio"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^\w(\w)*(-{1})?(\w)*\w$/",
+     *     match=true,
+     *     message="El código no puede contener caracteres especiales ni espacios."
+     * )
+     * @Assert\Length(
+     *     min = "4", max="10",minMessage="El código debe tener mínimo 4 caracteres y máximo 10."
+     * )
      */
     private $code;
     /**
      * @ORM\Column(type="string", length=100, unique=true)
+     * @Assert\NotBlank(
+     *     message="El nombre es un campo obligatorio"
+     * )
+     * @Assert\Length(
+     *     min = "4", minMessage="El nombre debe contener mínimo 4 caracteres."
+     * )
      */
     private $name;
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(
+     *     message="La descripción es un campo obligatorio"
+     * )
      */
     private $description;
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(
+     *     message="La marca es un campo obligatorio"
+     * )
      */
     private $trademark;
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(
+     *     message="La Categoría es un campo obligatorio"
+     * )
      */
     private $category;
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float",precision=8,scale=2)
+     * @Assert\NotBlank(
+     *     message="El precio es un campo obligatorio"
+     * )
+     * @Assert\GreaterThan(
+     *     value="0",
+     *     message="El precio debe ser un numero mayor a 0"
+     * )
      */
     private $price;
 
