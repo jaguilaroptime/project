@@ -11,17 +11,48 @@
     <div class="container">
         <div class="page-header">
             <h1>Lista de Productos</h1>
-            <a href="{{ path('newproduct')}}" class="btn btn-primary right">Nuevo Producto</a>
+            <a href="{{ path('newproduct')}}" class="btn btn-primary">Nuevo Producto</a>
         </div>
 
         {% if pagination is not empty %}
 
+        <!-- Search-->
+        <form class="form-horizontal" name="product" method="post" action="{{ path('listproduct') }}" novalidate="novalidate">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Realizar Busqueda</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label text-center">Código</label>
+                        <div class="col-md-6 ">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label text-center">Nombre</label>
+                        <div class="col-md-6 ">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <button type="submit" class="btn btn-primary pull-right">Buscar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+        <br/>
         {# total items count #}
         <div class="count">
-            <span class="label label-primary">
+            <span class="label label-primary s16">
                 Entradas en total: {{ pagination.getTotalItemCount }}
             </span>
         </div>
+        <br/>
 
         <div class="table-responsive">
             <table class="table table-striped">

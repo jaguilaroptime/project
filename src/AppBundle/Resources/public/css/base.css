@@ -15,6 +15,96 @@ body {
     background-color: #f5f5f5;
 }
 
+.clear{ clear:both !important;}
+.center{ text-align:center;}
+.left{ text-align:left;}
+.right{ text-align:right;}
+.bold_txt{ font-family: 'hp_simplifiedregular', Arial,Helvetica,sans-serif !important; font-weight: bold;}
+.normal_txt{ font-family: 'hp_simplifiedregular', Arial,Helvetica,sans-serif !important; font-weight:normal ;}
+.light_txt{font-family: 'hp_simplifiedregular', Arial,Helvetica,sans-serif !important; font-weight:normal}
+.black_txt{ color:#000000;}
+.orag_txt{ color:#d4421d}
+.blue_txt{ color:#0096D6;}
+.grey_txt{ color:#5a5a5a;}
+.vertical_alg{ vertical-align:middle !important;}
+.link_blue{ color:#0096D6 !important; text-decoration:none;}
+.link_black{ color:#000000; text-decoration:none;}
+.link_blue:hover{ text-decoration:underline;}
+.nomargin{ margin:0 !important}
+.martop_neg8{ margin-top:-8px !important}
+.m_t5{ margin-top:5px}
+.m_t10{ margin-top:10px}
+.m_t20{ margin-top:20px}
+.m_t30{ margin-top:30px}
+.m_t40{ margin-top:40px}
+.m_t50{ margin-top:50px}
+.m_b5{ margin-bottom:5px}
+.m_b10{ margin-bottom:10px}
+.m_b20{ margin-bottom:20px}
+.m_b30{ margin-bottom:30px}
+.m_b35{ margin-bottom:35px}
+.m_b40{ margin-bottom:40px}
+.m_b50{ margin-botoom:50px}
+.nopadding{ padding:0 !important}
+.p_t5{ padding-top:5px}
+.p_t10{ padding-top:10px}
+.p_t15{ padding-top:15px}
+.p_t20{ padding-top:20px}
+.p_t25{ padding-top:25px}
+.p_t30{ padding-top:30px}
+.p_t35{ padding-top:35px}
+.p_t40{ padding-top:40px}
+.p_t50{ padding-top:50px}
+.p_b5{ padding-bottom:5px}
+.p_b10{ padding-bottom:10px}
+.p_b15{ padding-bottom:15px}
+.p_b20{ padding-bottom:20px}
+.p_b30{ padding-bottom:30px}
+.p_b40{ padding-botoom:40px}
+.p_b50{ padding-botoom:50px}
+.s70{font-size:70px; line-height:72px}
+.s60{font-size:60px; line-height:62px}
+.s50{font-size:50px; line-height:52px}
+.s45{font-size:45px; line-height:47px}
+.s40{font-size:40px; line-height:42px}
+.s38{font-size:38px; line-height:40px}
+.s36{font-size:36px; line-height:38px}
+.s35{font-size:35px; line-height:37px}
+.s34{font-size:34px; line-height:36px}
+.s30{font-size:30px; line-height:32px}
+.s28{font-size:28px; line-height:30px}
+.s26{font-size:26px; line-height:28px}
+.s24{font-size:24px; line-height:26px}
+.s22{font-size:22px; line-height:24px}
+.s20{font-size:20px; line-height:22px}
+.s18{font-size:18px; line-height:20px}
+.s16{font-size:16px; line-height:18px}
+.s15{font-size:15px; line-height:18px}
+.s14{font-size:14px; line-height:17px}
+.s12{font-size:12px; line-height:13px}
+.s10{font-size:10px; line-height:11px}
+.nospaceletter{ white-space:nowrap;}
+.hidden{ display:none;}
+.overflow{ overflow:hidden;}
+.rgt{ float:right;}
+.lgt{ float:left;}
+.i_block{ display:inline-block;}
+.t_table{ display:table;}
+.i_table{ display: inline-table;}
+.t_cell{ display:table-cell;}
+.va_t{ vertical-align:top;}
+.va_m{ vertical-align: middle;}
+.va_b{ vertical-align: bottom;}
+.w100{ width:100%;}
+.upper{ text-transform:uppercase;}
+.pr{ position:relative;}
+.pa{ position:absolute;}
+.title_finish {
+    border-bottom: 1px solid;
+    margin: 0 auto;
+    padding-bottom: 10px;
+    width: 100%;
+}
 
 /* Custom page CSS
 -------------------------------------------------- */
