@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Product;
+use AppBundle\Form\ProductSearchType;
 use AppBundle\Form\ProductType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,10 +16,24 @@ class ProductController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $products = $this->getDoctrine()
-            ->getRepository('AppBundle:Product')
-            ->findAll();
 
+        $form = $this->createForm(ProductSearchType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){
+            $formData = $request->get($form->getName());
+
+            $code = $formData['code'];
+            $name = $formData['name'];
+
+            $products = $this->getDoctrine()
+                ->getRepository('AppBundle:Product')
+                ->findByParams(array('code'=>$code, 'name'=>$name));
+        }else{
+            $products = $this->getDoctrine()
+                ->getRepository('AppBundle:Product')
+                ->findAll();
+        }
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -27,7 +42,7 @@ class ProductController extends Controller
             5
         );
 
-        return $this->render('products/index.html.twig',array('pagination'=>$pagination));
+        return $this->render('products/index.html.twig',array('pagination'=>$pagination,'form'=>$form->createView()));
     }
 
     /**
