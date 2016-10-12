@@ -15,7 +15,7 @@
         </div>
 
         <!-- Search-->
-        {{ form_start(form,{'action': path('listproduct'),'attr':{'class':'form-horizontal', 'novalidate': 'novalidate'}}) }}
+        {# form_start(form,{'action': path('listproduct'),'attr':{'class':'form-horizontal', 'novalidate': 'novalidate'}}) }}
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Realizar Busqueda</h3>
@@ -41,14 +41,32 @@
                     </div>
                 </div>
             </div>
-        {{ form_end(form) }}
+        {{ form_end(form) #}
+
+        <div class="well well-sm">
+            <form action="{{ path('listproduct') }}" method="get">
+                <div class="input-group">
+                    <input type="search"
+                           name="search"
+                           class="form-control"
+                           placeholder="Buscar por Código, Nombre o Descripción"
+                           value="{{ app.request.get('search') }}">
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <a href="{{ path('listproduct')}}" class="btn btn-default">Limpiar</a>
+            </span>
+                </div>
+            </form>
+        </div>
+
+        {% include 'flashes.html.twig' %}
 
         <br/>
         {% if pagination is not empty %}
             {# total items count #}
             <div class="count">
                 <span class="label label-primary s16">
-                    Entradas en total: {{ pagination.getTotalItemCount }}
+                    Total de registros: {{ pagination.getTotalItemCount }}
                 </span>
             </div>
             <br/>

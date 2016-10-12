@@ -36,12 +36,6 @@
         <!-- Fixed navbar -->
         {% include 'menu.html.twig' %}
 
-        {% for flash_message in app.session.flashBag.get('message') %}
-            <div class="flash-notice">
-                {{ flash_message }}
-            </div>
-        {% endfor %}
-
         {% block content %}{% endblock %}
 
         <footer class="footer">

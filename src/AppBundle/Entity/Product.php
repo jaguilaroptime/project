@@ -8,11 +8,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
  * @ORM\Table(name="product")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
+ * @UniqueEntity("code", message="Este código ya existe en otro producto")
+ * @UniqueEntity("name", message="Este nombre ya existe en otro producto")
  */
 class Product
 {
@@ -77,6 +80,10 @@ class Product
      * @Assert\GreaterThan(
      *     value="0",
      *     message="El precio debe ser un numero mayor a 0"
+     * )
+     * @Assert\Type(
+     *     "numeric",
+     *     message="El precio debe ser un número válido"
      * )
      */
     private $price;

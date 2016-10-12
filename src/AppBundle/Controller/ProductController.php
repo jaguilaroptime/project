@@ -8,11 +8,15 @@ use AppBundle\Form\ProductType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\Query;
 
+/**
+* @Route("/product")
+*/
 class ProductController extends Controller
 {
     /**
-     * @Route("/", name="listproduct")
+     * @Route("/list", name="listproduct1")
      */
     public function indexAction(Request $request)
     {
@@ -46,6 +50,35 @@ class ProductController extends Controller
     }
 
     /**
+
+     * @Route("/", name="listproduct")
+
+     */
+
+    public function listAction(Request $request)
+
+    {
+        /*$products = $this->get('app.repository.product')
+            ->getQueryBuilderForAll($request->query->get('search'))
+            ->getQuery();*/
+        $products = $this->getDoctrine()
+            ->getRepository('AppBundle:Product')
+            ->getQueryBuilderForAll($request->query->get('search'));
+
+        //$products->setHydrationMode(Query::HYDRATE_ARRAY);
+
+        $paginator = $this->get('knp_paginator');
+
+        $pagination = $paginator->paginate(
+            $products,
+            $request->query->getInt('page', 1),
+            5
+        );
+
+        return $this->render('products/index.html.twig',array('pagination'=>$pagination));
+    }
+
+    /**
      * @Route("/new/", name="newproduct")
      */
     public function newAction(Request $request)
@@ -63,10 +96,10 @@ class ProductController extends Controller
             $em->persist($p);
             $em->flush();
 
-            $this->addFlash(
-                'message',
-                'El producto se ha guardado!!!'
-            );
+            $this->addFlash('success', sprintf(
+                'El producto con el código %s se ha creado con éxito!',
+                $product->getCode()
+            ));
 
             return $this->redirectToRoute('listproduct');
         }
@@ -77,7 +110,7 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/edit/{id}", name="editproduct")
+     * @Route("/edit/{id}/", name="editproduct")
      */
     public function editAction(Request $request,$id)
     {
@@ -103,10 +136,10 @@ class ProductController extends Controller
             $em->persist($p);
             $em->flush();
 
-            $this->addFlash(
-                'message',
-                'El producto se ha modificado y guardado!!!'
-            );
+            $this->addFlash('success', sprintf(
+                'El producto con el código %s se ha actualizado con éxito!',
+                $product->getCode()
+            ));
 
             return $this->redirectToRoute('listproduct');
         }
@@ -118,7 +151,7 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/delete/{id}", name="deleteproduct")
+     * @Route("/delete/{id}/", name="deleteproduct")
      */
     public function deleteAction(Request $request,$id)
     {
