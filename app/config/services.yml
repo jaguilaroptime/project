@@ -4,7 +4,7 @@ parameters:
 #    parameter_name: value
 
 services:
-    #app.repository.product:
-    #    class: AppBundle\Repository\ProductRepository
-    #    factory: ["@doctrine.orm.entity_manager", "getRepository"]
-    #   arguments: [AppBundle\Entity\Product]
+    app.repository.product:
+      class: AppBundle\Repository\ProductRepository
+      factory: ["@doctrine.orm.entity_manager", "getRepository"]
+      arguments: [AppBundle\Entity\Product]

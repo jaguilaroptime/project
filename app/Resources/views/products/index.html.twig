@@ -93,7 +93,7 @@
                             <td>{{ product.description }}</td>
                             <td>{{ product.trademark }}</td>
                             <td>{{ product.category }}</td>
-                            <td>{{ product.price }}</td>
+                            <td>{{ product.price|number_format(2, '.', ',') }}</td>
                             <td>
                                 <a href="{{ path('editproduct',{id : product.id})}}">
                                     <img src="{{ asset('bundles/app/images/edit.png') }}" width="15px" height="15px"/>

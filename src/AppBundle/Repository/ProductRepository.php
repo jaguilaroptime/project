@@ -70,7 +70,31 @@ class ProductRepository extends EntityRepository
                 'search_like' => '%'.$search.'%',
             ]);
         }
+        $query->orderBy('product.id', 'DESC');
+
         return $query;
+    }
+
+    /**
+     * Función que guarda el registro
+     * @param Product $product
+     * @param bool $flush
+     */
+    public function save(Product $product, $flush = true)
+    {
+        $this->_em->persist($product);
+        $flush && $this->_em->flush();
+    }
+
+    /**
+     * Funciona que eliminar el registro
+     * @param Product $product
+     * @param bool $flush
+     */
+    public function delete(Product $product, $flush = true)
+    {
+        $this->_em->remove($product);
+        $flush and $this->_em->flush();
     }
 
 }
