@@ -7,6 +7,8 @@
 
 namespace AppBundle\Entity;
 
+
+use AppBundle\Entity\ProductCategory;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -66,7 +68,8 @@ class Product
      */
     private $trademark;
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ProductCategory")
+     * @ORM\JoinColumn(name="category", referencedColumnName="id")
      * @Assert\NotBlank(
      *     message="La Categoría es un campo obligatorio"
      * )
@@ -161,7 +164,7 @@ class Product
     }
 
     /**
-     * @return mixed
+     * @return ProductCategory
      */
     public function getCategory()
     {
@@ -169,12 +172,13 @@ class Product
     }
 
     /**
-     * @param mixed $category
+     * @return product
      */
-    public function setCategory($category)
+    public function setCategory(ProductCategory $category)
     {
-        $this->category = $category;
+        return $this->category = $category;
     }
+
 
     /**
      * @return mixed

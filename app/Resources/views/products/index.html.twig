@@ -9,9 +9,10 @@
 {% block content %}
     <!-- Begin page content -->
     <div class="container">
-        <div class="page-header">
-            <h1>Lista de Productos</h1>
-            <a href="{{ path('newproduct')}}" class="btn btn-primary">Nuevo Producto</a>
+        <div class="page-header clear-fix">
+            <h1>Lista de Productos
+                <a href="{{ path('newproduct')}}" class="btn btn-primary pull-right">Nuevo Producto</a>
+            </h1>
         </div>
 
         <!-- Search-->
@@ -75,8 +76,8 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Código</th>
-                            <th>Nombre</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Código', 'product.code') }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Nombre', 'product.name') }}</th>
                             <th>Descipción</th>
                             <th>Marca</th>
                             <th>Categoria</th>
@@ -92,7 +93,7 @@
                             <td>{{ product.name }}</td>
                             <td>{{ product.description }}</td>
                             <td>{{ product.trademark }}</td>
-                            <td>{{ product.category }}</td>
+                            <td>{{ product.category.name }}</td>
                             <td>{{ product.price|number_format(2, '.', ',') }}</td>
                             <td>
                                 <a href="{{ path('editproduct',{id : product.id})}}">

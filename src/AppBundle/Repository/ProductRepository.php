@@ -56,9 +56,9 @@ class ProductRepository extends EntityRepository
 
     public function getQueryBuilderForAll($search = null)
     {
-        $query = $this->createQueryBuilder('product');
-         //   ->addSelect('category')
-         //   ->leftJoin('product.category', 'category');
+        $query = $this->createQueryBuilder('product')
+            ->addSelect('category')
+            ->innerJoin('product.category', 'category');
 
         if(is_string($search) and !empty($search)){
             $query->andWhere($query->expr()->orX(
