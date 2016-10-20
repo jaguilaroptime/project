@@ -9,15 +9,40 @@
 
         {% form_theme form 'bootstrap_3_layout.html.twig' %}
 
-        <div class="row">
-            {{ form_start(form,{'action': path('editproduct',{id : product.id}),'attr':{'class':'form-horizontal', 'novalidate': 'novalidate'}}) }}
-            <div class="form-group">
-                <div class="col-sm-10">
-                    {{ form_widget(form) }}
+        {{ form_start(form,{'action': path('editproduct',{id : product.id}),'attr':{'novalidate': 'novalidate'}}) }}
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form_row(form.code) }}
                 </div>
-                {{ form_errors(form) }}
+                <div class="col-sm-6">
+                    {{ form_row(form.name) }}
+                </div>
             </div>
-            {{ form_end(form) }}
-        </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form_row(form.description) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_row(form.trademark) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form_row(form.category) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_row(form.price) }}
+                </div>
+            </div>
+
+            <!-- Botones de accion -->
+            <div class="well well-sm">
+                <button type="submit" class="btn btn-primary pull-right">Guardar</button>
+                <a class="btn btn-default" href="{{ path('listproduct') }}" role="button">Lista de Productos</a>
+            </div>
+
+        {{ form_end(form) }}
     </div>
 {% endblock %}

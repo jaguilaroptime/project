@@ -2,7 +2,9 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -18,9 +20,16 @@ class ProductType extends AbstractType
             ->add('name',TextType::class, array('label'=>'Nombre'))
             ->add('description',TextareaType::class, array('label'=>'Descripción'))
             ->add('trademark',TextType::class, array('label'=>'Marca'))
-            ->add('category',TextType::class, array('label'=>'Categoria'))
-            ->add('price',NumberType::class, array('label'=>'Precio'))
-            ->add('save', SubmitType::class, array('label' => 'Guardar','attr' => array('class' => 'btn btn-primary pull-right')));
+            //->add('category',TextType::class, array('label'=>'Categoria'))
+            ->add('category',EntityType::class,array(
+                'class'=>'AppBundle\Entity\ProductCategory',
+                'choice_label' => 'name',
+                'placeholder' => 'Seleccionar',
+            ))
+            ->add('price',NumberType::class, array('label'=>'Precio'));
+            //->add('back', ButtonType::class, array('label' => 'Listado de Productos'))
+            //->add('save', SubmitType::class, array('label' => 'Guardar'));
+            //->add('save', SubmitType::class, array('label' => 'Guardar','attr' => array('class' => 'btn btn-primary pull-right')));
     }
 
     public function configureOptions(OptionsResolver $resolver)
