@@ -8,3 +8,29 @@ services:
       class: AppBundle\Repository\ProductRepository
       factory: ["@doctrine.orm.entity_manager", "getRepository"]
       arguments: [AppBundle\Entity\Product]
+
+    app.gateway.product:
+      class: ExampleBundle\Gateway\ProductGateway
+      arguments: ["@doctrine.orm.entity_manager"]
+
+    app.twig.extension.boolean_to_string:
+      class: ExampleBundle\Twig\Extension\BooleanToStringExtension
+      arguments:
+        - "@translator"
+      public: false
+      tags:
+        - { name: twig.extension}
+
+    app.listener.hola_mundo_logger:
+      class: ExampleBundle\EventListener\HolaMundoLogger
+      arguments: ["@logger"]
+      tags:
+        - { name: kernel.event_listener, event: kernel.request, method: agregarMensajeAlLoger }
+
+    app.listener.disable_active_product_category_filter:
+      class: ExampleBundle\EventListener\DisableProductCategoryFilterListener
+      arguments:
+        - "@doctrine.orm.entity_manager"
+        - "@security.authorization_checker"
+      tags:
+        - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

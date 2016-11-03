@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="page-header">
+            <h1>Example 1</h1>
+        </div>
+
+        {# form_theme form 'bootstrap_3_layout.html.twig' #}
+
+        {{ form_start(form,{'action': path('new_example'),'attr':{'novalidate': 'novalidate'}}) }}
+            {{ form_errors(form) }}
+
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form_row(form.nombre) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form_row(form.profesion) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form_row(form.pais) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form_row(form.estado) }}
+                </div>
+            </div>
+            <!-- Botones de accion -->
+            <div class="well well-sm">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

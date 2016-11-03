@@ -9,7 +9,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 /**
- * @ORM\Table(name="product_category")
+ * @ORM\Table(name="product_category2")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductCategoryRepository")
  */
 class ProductCategory

@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {% javascripts '@AppBundle/Resources/public/js/bootbox.min.js'%}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+    <!-- Begin page content -->
+    <div class="container">
+
+        <div class="page-header clear-fix">
+            <h1>Lista de Tipos de Productos</h1>
+        </div>
+
+
+
+
+        {% include 'flashes.html.twig' %}
+
+        <br/>
+        {% if categories is not empty %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Premiun</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for c in categories %}
+                        <tr>
+                            <td>{{ c.name }}</td>
+                            <td>{{ c.premiun }}</td>
+                            <td>
+                                <a href="{{ path('editproduct',{id : c.id})}}">
+                                    <img src="{{ asset('bundles/app/images/edit.png') }}" width="15px" height="15px"/>
+                                </a>
+                            </td>
+                            <td>
+                                <a onclick="confirmDelete({{ c.id }})">
+                                    <img src="{{ asset('bundles/app/images/delete.png') }}" width="15px" height="15px"/>
+                                </a>
+                            </td>
+                        </tr>
+
+                    {%  endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {# No existen productos #}
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                No existen tipos de productos.
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function confirmDelete(id) {
+            bootbox.confirm({
+                message: "Desea eliminar el producto?",
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        window.location = 'delete/'+parseInt(id);
+                        return false;
+                    }
+
+                }
+            });
+        }
+    </script>
+
+{% endblock %}
