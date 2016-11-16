@@ -13,30 +13,31 @@
  * @author Artem Zabelin <artjomzabelin@gmail.com>
  */
 #}
-
 {% if pageCount > 1 %}
-    <ul class="pagination">
+    <ul class="pagination pagination-lg">
 
     {% if previous is defined %}
-        <li>
-            <a rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">&laquo;&nbsp;{{ 'Anterior'|trans }}</a>
+        <li class="page-item">
+            <a class="page-link" rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">&laquo;&nbsp;{{ 'Anterior'|trans }}</a>
         </li>
     {% else %}
-        <li class="disabled">
-            <span>&laquo;&nbsp;{{ 'Anterior'|trans }}</span>
+        <li class="page-item disabled">
+            <a class="page-link">
+                <span>&laquo;&nbsp;{{ 'Anterior'|trans }}</span>
+            </a>
         </li>
     {% endif %}
 
     {% if startPage > 1 %}
-        <li>
-            <a href="{{ path(route, query|merge({(pageParameterName): 1})) }}">1</a>
+        <li class="page-item">
+            <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): 1})) }}">1</a>
         </li>
         {% if startPage == 3 %}
-            <li>
-                <a href="{{ path(route, query|merge({(pageParameterName): 2})) }}">2</a>
+            <li class="page-item">
+                <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): 2})) }}">2</a>
             </li>
         {% elseif startPage != 2 %}
-        <li class="disabled">
+        <li class="page-item disabled">
             <span>&hellip;</span>
         </li>
         {% endif %}
@@ -44,12 +45,14 @@
 
     {% for page in pagesInRange %}
         {% if page != current %}
-            <li>
-                <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
+            <li class="page-item">
+                <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
             </li>
         {% else %}
-            <li class="active">
-                <span>{{ page }}</span>
+            <li class="page-item active">
+                <a class="page-link">
+                    <span>{{ page }}</span>
+                </a>
             </li>
         {% endif %}
 
@@ -58,28 +61,33 @@
     {% if pageCount > endPage %}
         {% if pageCount > (endPage + 1) %}
             {% if pageCount > (endPage + 2) %}
-                <li class="disabled">
+                <li class="page-item disabled">
                     <span>&hellip;</span>
                 </li>
             {% else %}
-                <li>
-                    <a href="{{ path(route, query|merge({(pageParameterName): (pageCount - 1)})) }}">{{ pageCount -1 }}</a>
+                <li class="page-item">
+                    <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): (pageCount - 1)})) }}">{{ pageCount -1 }}</a>
                 </li>
             {% endif %}
         {% endif %}
-        <li>
-            <a href="{{ path(route, query|merge({(pageParameterName): pageCount})) }}">{{ pageCount }}</a>
+        <li class="page-item">
+            <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): pageCount})) }}">{{ pageCount }}</a>
         </li>
     {% endif %}
 
     {% if next is defined %}
-        <li>
-            <a rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}">{{ 'Próximo'|trans }}&nbsp;&raquo;</a>
+        <li class="page-item">
+            <a class="page-link" rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}">{{ 'Próximo'|trans }}&nbsp;&raquo;</a>
         </li>
     {% else %}
-        <li class="disabled">
-            <span>{{ 'Próximo'|trans }}&nbsp;&raquo;</span>
+        <li class="page-item disabled">
+            <a class="page-link">
+                <span>{{ 'Próximo'|trans }}&nbsp;&raquo;</span>
+            </a>
         </li>
     {% endif %}
     </ul>
 {% endif %}
+
+
+

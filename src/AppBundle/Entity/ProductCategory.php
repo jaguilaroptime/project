@@ -9,7 +9,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 /**
- * @ORM\Table(name="product_category2")
+ * @ORM\Table(name="product_category")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductCategoryRepository")
  */
 class ProductCategory
@@ -33,6 +33,13 @@ class ProductCategory
      * @ORM\Column(name="active", type="boolean")
      */
     private $active = true;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_premiun", type="boolean")
+     */
+    private $premiun = false;
 
     /**
      * @return mixed
@@ -72,6 +79,22 @@ class ProductCategory
     public function setActive($active)
     {
         $this->active = $active;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPremiun()
+    {
+        return $this->premiun;
+    }
+
+    /**
+     * @param boolean $premiun
+     */
+    public function setPremiun($premiun)
+    {
+        $this->premiun = $premiun;
     }
 
     public function __toString()

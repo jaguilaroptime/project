@@ -61,7 +61,7 @@ doctrine:
         auto_mapping: true
         filters:
           active_product_category:
-            class: ExampleBundle\Doctrine\Filter\ActiveProductCategoryFilter
+            class: AppBundle\Doctrine\Filter\ActiveProductCategoryFilter
             enabled: true
 
 # Swiftmailer Configuration

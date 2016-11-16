@@ -43,6 +43,15 @@ class User implements UserInterface
      */
     private $salt;
 
+    /**
+     * @var array
+     */
+    protected $roles;
+
+    public function __construct()
+    {
+        $this->roles = array();
+    }
 
     /**
      * Get id
@@ -126,10 +135,10 @@ class User implements UserInterface
         return $this->salt;
     }
 
-    public function getRoles()
+    /*public function getRoles()
     {
-        return ['ROLE_USER'];
-    }
+        return ['ROLE_ADMIN'];
+    }*/
 
     public function getUsername()
     {
@@ -140,5 +149,46 @@ class User implements UserInterface
     {
 
     }
+
+
+
+    /*
+     * @param array
+     */
+    /*public function setRoles($roles)
+    {
+        $this->roles = array();
+
+        foreach ($roles as $role) {
+            $this->addRole($role);
+        }
+
+        return $this;
+    }*/
+
+    /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        // we need to make sure to have at least one role
+        //$roles[] = 'ROLE_USER';
+        return array('ROLE_USER');
+    }
+
+    /*public function addRole($role)
+    {
+        $role = strtoupper($role);
+        if ($role === static::ROLE_DEFAULT) {
+            return $this;
+        }
+
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
+
+        return $this;
+    }*/
+
 }
 

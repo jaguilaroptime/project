@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="product2")
+ * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
  * @UniqueEntity("code", message="Este código ya existe en otro producto")
  * @UniqueEntity("name", message="Este nombre ya existe en otro producto")

@@ -15,35 +15,6 @@
             </h1>
         </div>
 
-        <!-- Search-->
-        {# form_start(form,{'action': path('listproduct'),'attr':{'class':'form-horizontal', 'novalidate': 'novalidate'}}) }}
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Realizar Busqueda</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <label class="col-md-4 control-label text-center">{{ form_label(form.code) }}</label>
-                        <div class="col-md-6">
-                            {{ form_widget(form.code) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label text-center">{{ form_label(form.name) }}</label>
-                        <div class="col-md-6">
-                            {{ form_widget(form.name) }}
-                        </div>
-                    </div>
-                    <div class="form-group  ">
-                        <div class="col-md-10">
-                            {{ form_widget(form.search) }}
-                            <a href="{{ path('listproduct')}}" class="btn btn-default pull-right">Limpiar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {{ form_end(form) #}
-
         <div class="well well-sm">
             <form action="{{ path('listproduct') }}" method="get">
                 <div class="input-group">
@@ -54,7 +25,7 @@
                            value="{{ app.request.get('search') }}">
             <span class="input-group-btn">
                 <button type="submit" class="btn btn-primary">Buscar</button>
-                <a href="{{ path('listproduct')}}" class="btn btn-default">Limpiar</a>
+                <a href="{{ path('listproduct')}}" class="btn btn btn-secondary">Limpiar</a>
             </span>
                 </div>
             </form>

@@ -9,6 +9,14 @@ services:
       factory: ["@doctrine.orm.entity_manager", "getRepository"]
       arguments: [AppBundle\Entity\Product]
 
+    app.listener.disable_active_product_category_filter:
+      class: AppBundle\EventListener\DisableProductCategoryFilterListener
+      arguments:
+        - "@doctrine.orm.entity_manager"
+        - "@security.authorization_checker"
+      tags:
+        - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
     app.gateway.product:
       class: ExampleBundle\Gateway\ProductGateway
       arguments: ["@doctrine.orm.entity_manager"]
@@ -27,10 +35,10 @@ services:
       tags:
         - { name: kernel.event_listener, event: kernel.request, method: agregarMensajeAlLoger }
 
-    app.listener.disable_active_product_category_filter:
-      class: ExampleBundle\EventListener\DisableProductCategoryFilterListener
-      arguments:
-        - "@doctrine.orm.entity_manager"
-        - "@security.authorization_checker"
-      tags:
-        - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    #app.listener.disable_active_product_category_filter:
+    #  class: ExampleBundle\EventListener\DisableProductCategoryFilterListener
+    #  arguments:
+    #    - "@doctrine.orm.entity_manager"
+    #    - "@security.authorization_checker"
+    #  tags:
+    #    - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

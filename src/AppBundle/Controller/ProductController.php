@@ -32,7 +32,7 @@ class ProductController extends Controller
         $pagination = $this->get('knp_paginator')->paginate(
             $products,
             $request->query->getInt('page', 1),
-            5
+            10
         );
 
         return $this->render('products/index.html.twig',array('pagination'=>$pagination));
