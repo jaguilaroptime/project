@@ -42,11 +42,15 @@
     </head>
     <body>
         <!-- Fixed navbar -->
-        {% if app.user%}
-            {% include 'menu.html.twig' %}
-        {% endif %}
+        <header>
+            {% if app.user != null%}
+                {% include 'menu.html.twig' %}
+            {% endif %}
+        </header>
 
-        {% block content %}{% endblock %}
+        <section id="content">
+            {% block content %}{% endblock %}
+        </section>
 
         <footer class="footer">
             <div class="container">

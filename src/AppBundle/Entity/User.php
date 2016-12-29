@@ -45,6 +45,8 @@ class User implements UserInterface
 
     /**
      * @var array
+     *
+     * @ORM\Column(name="roles", type="string", length=255)
      */
     protected $roles;
 
@@ -172,8 +174,9 @@ class User implements UserInterface
     public function getRoles()
     {
         // we need to make sure to have at least one role
-        //$roles[] = 'ROLE_USER';
-        return array('ROLE_USER');
+        $roles[] = $this->roles;
+        //return array('ROLE_USER');
+        return $roles;
     }
 
     /*public function addRole($role)
