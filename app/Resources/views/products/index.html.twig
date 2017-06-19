@@ -42,17 +42,19 @@
                 </span>
             </div>
             <br/>
-
+            <a href="{{ path('exportProducts')}}" class="btn btn-link">Descargar Excel</a>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th>Imagen</th>
                             <th>{{ knp_pagination_sortable(pagination, 'Código', 'product.code') }}</th>
                             <th>{{ knp_pagination_sortable(pagination, 'Nombre', 'product.name') }}</th>
                             <th>Descipción</th>
                             <th>Marca</th>
                             <th>Categoria</th>
                             <th>Precio</th>
+                            <th>Fecha</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
@@ -60,12 +62,23 @@
                     <tbody>
                     {% for product in pagination %}
                         <tr>
+                            {% if product.img is not empty %}
+                            <td><a target="_blank" href="{{ asset('uploads/product/' ~ product.img) }}">Ver Imagen</a></td>
+                            {% else %}
+                            <td> - </td>
+                            {% endif %}
                             <td>{{ product.code }}</td>
                             <td>{{ product.name }}</td>
                             <td>{{ product.description }}</td>
                             <td>{{ product.trademark }}</td>
                             <td>{{ product.category.name }}</td>
-                            <td>{{ product.price|number_format(2, '.', ',') }}</td>
+                            <td>{{ product.price|number_format }}</td>
+                            <td>{{ product.createdAt is empty ? " - ":product.createdAt|date("d/m/Y") }}</td>
+                            <td>
+                                <a href="{{ path('reaExcelProducts',{id : product.id})}}">
+                                    <img src="{{ asset('bundles/app/images/edit.png') }}" width="15px" height="15px"/>
+                                </a>
+                            </td>
                             <td>
                                 <a href="{{ path('editproduct',{id : product.id})}}">
                                     <img src="{{ asset('bundles/app/images/edit.png') }}" width="15px" height="15px"/>

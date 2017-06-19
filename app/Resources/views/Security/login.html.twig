@@ -24,6 +24,88 @@
             <input name="_password" type="password" id="inputPassword" class="form-control" placeholder="Contraseña">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sessión</button>
         </form>
-
     </div> <!-- /container -->
+
+    <!--div id="app">
+        <h1> ${ message }</h1>
+        <p v-if="seen">Now you see me</p>
+        <ol>
+            <li v-for="todo in todos">
+                ${ todo.text }
+            </li>
+        </ol>
+        <button v-on:click="reverseMessage">Reverse Message</button>
+        <input v-model="message">
+    </div-->
+
+    <div id="todo-list-example">
+        <input
+                v-model="newTodoText"
+                v-on:keyup.enter="addNewTodo"
+                placeholder="Add a todo"
+        >
+        <ul>
+            <li
+                    is="todo-item"
+                    v-for="(todo, index) in todos"
+                    v-bind:key="todo"
+                    v-bind:title="todo"
+                    v-on:remove="todos.splice(index, 1)"
+            ></li>
+        </ul>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/vue@2.2.4"></script>
+    <script>
+        Vue.component('todo-item', {
+            delimiters: ['${', '}'],
+            template: '<li> ${ title } <button v-on:click="$emit(\'remove\')">X</button></li>',
+            props: ['title']
+        })
+
+        new Vue({
+            delimiters: ['${', '}'],
+            el: '#todo-list-example',
+            data: {
+                newTodoText: '',
+                todos: [
+                    'Do the dishes',
+                    'Take out the trash',
+                    'Mow the lawn'
+                ]
+            },
+            methods: {
+                addNewTodo: function () {
+                    this.todos.push(this.newTodoText)
+                    this.newTodoText = ''
+                }
+            }
+        })
+
+        /*
+        var app = new Vue({
+            delimiters: ['${', '}'],
+            el: '#app',
+            data: {
+                message: 'Jeenson Aguilar',
+                seen: true,
+                todos: [
+                    { text: 'Learn JavaScript' },
+                    { text: 'Learn Vue' },
+                    { text: 'Build something awesome' }
+                ]
+            },
+            methods: {
+                reverseMessage: function () {
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        });
+        */
+
+    </script>
 {% endblock %}

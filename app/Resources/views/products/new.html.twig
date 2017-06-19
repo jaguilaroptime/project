@@ -10,7 +10,6 @@
         {% form_theme form 'bootstrap_3_layout.html.twig' %}
 
         {{ form_start(form,{'action': path('newproduct'),'attr':{'novalidate': 'novalidate'}}) }}
-            {{ form_errors(form) }}
 
             <div class="row">
                 <div class="col-sm-6">
@@ -36,6 +35,15 @@
                 </div>
                 <div class="col-sm-6">
                     {{ form_row(form.price) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form_row(form.img) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_row(form.gender_code) }}
                 </div>
             </div>
 

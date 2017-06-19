@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="page-header">
+            <h1>Nueva Operación Financiera</h1>
+        </div>
+
+        {% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+        {{ form_start(form,{'action': path('addFP'),'attr':{'novalidate': 'novalidate'}}) }}
+            {{ form_errors(form) }}
+
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form_row(form.tipoFpId) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_row(form.categoriaFpId) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form_row(form.valor) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_row(form.nota) }}
+                </div>
+            </div>
+
+
+            <!-- Botones de accion -->
+            <div class="well well-sm">
+                <button type="submit" class="btn btn-primary pull-right">Guardar</button>
+                <a class="btn btn-default" href="{{ path('listFP') }}" role="button">Lista de Operaciones Financieras</a>
+            </div>
+
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

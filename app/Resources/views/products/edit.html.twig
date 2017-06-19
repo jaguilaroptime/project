@@ -8,6 +8,7 @@
         </div>
 
         {% form_theme form 'bootstrap_3_layout.html.twig' %}
+        {% form_theme form.gender_code ':Form:fields.html.twig'  %}
 
         {{ form_start(form,{'action': path('editproduct',{id : product.id}),'attr':{'novalidate': 'novalidate'}}) }}
             <div class="row">
@@ -37,11 +38,18 @@
                 </div>
             </div>
 
-            <!-- Botones de accion -->
-            <div class="well well-sm">
-                <button type="submit" class="btn btn-primary pull-right">Guardar</button>
-                <a class="btn btn-default" href="{{ path('listproduct') }}" role="button">Lista de Productos</a>
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form_row(form.img) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_row(form.gender_code) }}
+                </div>
             </div>
+
+            <!-- Botones de accion -->
+            <button type="submit" class="btn btn-primary pull-right">Guardar</button>
+            <a class="btn btn-link pull-right" href="{{ path('listproduct') }}" role="button">Lista de Productos</a>
 
         {{ form_end(form) }}
     </div>

@@ -2,38 +2,59 @@
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
 #    parameter_name: value
+imports:
+    - { resource: services/repositories.yml }
 
 services:
-    app.repository.product:
-      class: AppBundle\Repository\ProductRepository
-      factory: ["@doctrine.orm.entity_manager", "getRepository"]
-      arguments: [AppBundle\Entity\Product]
+    app.message_generator:
+            class: AppBundle\Service\MessageGenerator
+            calls:
+                - method: setLogger
+                  arguments:
+                      - '@logger'
+    #app.exception_listener:
+    #    class: AppBundle\EventListener\ExceptionListener
+    #    tags:
+    #        - { name: kernel.event_listener, event: kernel.exception }
 
-    app.listener.disable_active_product_category_filter:
-      class: AppBundle\EventListener\DisableProductCategoryFilterListener
-      arguments:
-        - "@doctrine.orm.entity_manager"
-        - "@security.authorization_checker"
-      tags:
-        - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    #app.exception_subscriber:
+    #    class: AppBundle\EventSubcriber\ExceptionSubscriber
+    #    tags:
+    #        - { name: kernel.event_subscriber }
 
-    app.gateway.product:
-      class: ExampleBundle\Gateway\ProductGateway
-      arguments: ["@doctrine.orm.entity_manager"]
+    #app.listener.disable_active_product_category_filter:
+    #  class: AppBundle\EventListener\DisableProductCategoryFilterListener
+    #  arguments:
+    #    - "@doctrine.orm.entity_manager"
+    #    - "@security.authorization_checker"
+    #  tags:
+    #    - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
-    app.twig.extension.boolean_to_string:
-      class: ExampleBundle\Twig\Extension\BooleanToStringExtension
-      arguments:
-        - "@translator"
-      public: false
-      tags:
-        - { name: twig.extension}
+    #Ejercicio Voter
+    #product_voter:
+    #    class:      AppBundle\Security\ProductVoter
+    #    arguments: ['@security.access.decision_manager']
+    #    public:     false
+    #    tags:
+    #       - { name: security.voter }
 
-    app.listener.hola_mundo_logger:
-      class: ExampleBundle\EventListener\HolaMundoLogger
-      arguments: ["@logger"]
-      tags:
-        - { name: kernel.event_listener, event: kernel.request, method: agregarMensajeAlLoger }
+    #app.gateway.product:
+    #  class: ExampleBundle\Gateway\ProductGateway
+    #  arguments: ["@doctrine.orm.entity_manager"]
+
+    #app.twig.extension.boolean_to_string:
+    #  class: ExampleBundle\Twig\Extension\BooleanToStringExtension
+    #  arguments:
+    #    - "@translator"
+    #  public: false
+    #  tags:
+    #    - { name: twig.extension}
+
+    #app.listener.hola_mundo_logger:
+    #  class: ExampleBundle\EventListener\HolaMundoLogger
+    #  arguments: ["@logger"]
+    #  tags:
+    #    - { name: kernel.event_listener, event: kernel.request, method: agregarMensajeAlLoger }
 
     #app.listener.disable_active_product_category_filter:
     #  class: ExampleBundle\EventListener\DisableProductCategoryFilterListener

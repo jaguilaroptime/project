@@ -2,11 +2,11 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Form\Type\GenderType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,10 +26,16 @@ class ProductType extends AbstractType
                 'choice_label' => 'name',
                 'placeholder' => 'Seleccionar',
             ))
-            ->add('price',NumberType::class, array('label'=>'Precio'));
-            //->add('back', ButtonType::class, array('label' => 'Listado de Productos'))
-            //->add('save', SubmitType::class, array('label' => 'Guardar'));
-            //->add('save', SubmitType::class, array('label' => 'Guardar','attr' => array('class' => 'btn btn-primary pull-right')));
+            ->add('price',NumberType::class, array('label'=>'Precio'))
+            ->add('img', FileType::class, array(
+                'label' => 'Imagen (PNG file)',
+                "attr" =>array("class" => "form-control"),
+                "data_class" => null
+            ))
+            ->add('gender_code', GenderType::class, array(
+                'placeholder' => 'Choose a gender',
+            ))
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

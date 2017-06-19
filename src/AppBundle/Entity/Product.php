@@ -21,6 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Product
 {
+    const NUM_ITEMS = 5;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -90,6 +91,29 @@ class Product
      * )
      */
     private $price;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Por favor inserta una imagen al producto")
+     * @Assert\File(mimeTypes={"image/png","image/jpeg"})
+     */
+    private $img;
+
+    /**
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\Column(name="gender_code", type="string", length=5)
+     */
+    private $genderCode;
 
     /**
      * @return mixed
@@ -195,5 +219,54 @@ class Product
     {
         $this->price = $price;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * @param mixed $img
+     */
+    public function setImg($img)
+    {
+        $this->img = $img;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGenderCode()
+    {
+        return $this->genderCode;
+    }
+
+    /**
+     * @param mixed $genderCode
+     */
+    public function setGenderCode($genderCode)
+    {
+        $this->genderCode = $genderCode;
+    }
+
 
 }
