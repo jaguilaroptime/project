@@ -31,7 +31,6 @@ class ImageTypeExtension extends AbstractTypeExtension
     {
 
         if (isset($options['image_property'])) {
-
             // this will be whatever class/entity is bound to your form (e.g. Media)
             $parentData = $form->getParent()->getData();
             $imageUrl = null;
