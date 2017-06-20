@@ -75,11 +75,6 @@
                             <td>{{ product.price|number_format }}</td>
                             <td>{{ product.createdAt is empty ? " - ":product.createdAt|date("d/m/Y") }}</td>
                             <td>
-                                <a href="{{ path('reaExcelProducts',{id : product.id})}}">
-                                    <img src="{{ asset('bundles/app/images/edit.png') }}" width="15px" height="15px"/>
-                                </a>
-                            </td>
-                            <td>
                                 <a href="{{ path('editproduct',{id : product.id})}}">
                                     <img src="{{ asset('bundles/app/images/edit.png') }}" width="15px" height="15px"/>
                                 </a>

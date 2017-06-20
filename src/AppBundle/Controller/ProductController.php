@@ -27,9 +27,9 @@ class ProductController extends Controller
     public function listAction(Request $request)
 
     {
-        $pdf = new \mPDF();
+        /*$pdf = new \mPDF();
         $pdf->WriteHTML('<h1>Hello world!</h1>');
-        $pdf->Output();
+        $pdf->Output();*/
 
         $products = $this->get('app.repository.product')
             ->getQueryBuilderForAll($request->query->get('search'))
@@ -62,6 +62,8 @@ class ProductController extends Controller
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
+
+        dump($form->getData());
 
         if ($form->isSubmitted() && $form->isValid())
         {

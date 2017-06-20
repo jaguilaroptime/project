@@ -47,6 +47,12 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form_row(form.birthday) }}
+                </div>
+            </div>
+
             <!-- Botones de accion -->
             <div class="well well-sm">
                 <button type="submit" class="btn btn-primary pull-right">Guardar</button>
@@ -56,4 +62,15 @@
         {{ form_end(form) }}
 
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-MM-dd'
+            });
+        });
+    </script>
 {% endblock %}

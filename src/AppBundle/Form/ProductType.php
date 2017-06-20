@@ -5,6 +5,8 @@ namespace AppBundle\Form;
 use AppBundle\Form\Type\GenderType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -20,6 +22,17 @@ class ProductType extends AbstractType
             ->add('name',TextType::class, array('label'=>'Nombre'))
             ->add('description',TextareaType::class, array('label'=>'Descripción'))
             ->add('trademark',TextType::class, array('label'=>'Marca'))
+            /*->add('birthday',DateType::class, array(
+                'widget' => 'single_text',
+                'html5' => false,
+                'format' => 'yyyy-MM-dd',
+                'attr' => ['class' => 'js-datepicker'],
+            ))*/
+            ->add('birthday', BirthdayType::class,array(
+                'placeholder' => array(
+                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day'
+                )
+            ))
             //->add('category',TextType::class, array('label'=>'Categoria'))
             ->add('category',EntityType::class,array(
                 'class'=>'AppBundle\Entity\ProductCategory',
@@ -30,7 +43,8 @@ class ProductType extends AbstractType
             ->add('img', FileType::class, array(
                 'label' => 'Imagen (PNG file)',
                 "attr" =>array("class" => "form-control"),
-                "data_class" => null
+                "data_class" => null,
+                'image_property' => 'webPath'
             ))
             ->add('gender_code', GenderType::class, array(
                 'placeholder' => 'Choose a gender',

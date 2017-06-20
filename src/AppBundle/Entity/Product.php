@@ -100,10 +100,17 @@ class Product
      */
     private $img;
 
+    private $path;
     /**
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @var
+     * @ORM\Column(type="date")
+     */
+    private $birthday;
 
     public function __construct()
     {
@@ -268,5 +275,26 @@ class Product
         $this->genderCode = $genderCode;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
 
+    /**
+     * @param mixed $birthday
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+    }
+
+    public function getWebPath()
+    {
+        // ... $webPath being the full image URL, to be used in templates
+        $webPath = $this->path;
+        return $webPath;
+    }
 }
