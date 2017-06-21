@@ -44,7 +44,6 @@ class ProductType extends AbstractType
                 'label' => 'Imagen (PNG file)',
                 "attr" =>array("class" => "form-control"),
                 "data_class" => null,
-                'image_property' => 'webPath'
             ))
             ->add('gender_code', GenderType::class, array(
                 'placeholder' => 'Choose a gender',

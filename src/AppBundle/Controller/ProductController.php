@@ -63,8 +63,6 @@ class ProductController extends Controller
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
-        dump($form->getData());
-
         if ($form->isSubmitted() && $form->isValid())
         {
             //Cargar y mover la imagen
