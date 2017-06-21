@@ -12,8 +12,8 @@ class GenderType extends AbstractType
     {
         $resolver->setDefaults(array(
             'choices' => array(
-            'm' => 'Male',
-            'f' => 'Female',
+            'm' => 'Masculino',
+            'f' => 'Femenino',
             )
         ));
     }
