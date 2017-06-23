@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AppBundle:Ajax:index{% endblock %}
+
+{% block content %}
+<h1>Welcome to the Ajax:index page</h1>
+    <div id="containerPosts"></div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset("assets/vendor/jquery/dist/jquery.min.js") }}"></script>
+    <script>
+        jQuery(document).ready(function($)
+        {
+            $.ajax({
+                method: "GET",
+                url: "{{ url('ajax_posts') }}",
+                dataType: 'json',
+                success: function(data)
+                {
+                    if(data.hasOwnProperty("response") && data.response === "success")
+                    {
+                        if(data.hasOwnProperty("posts"))
+                        {
+                            //http://stackoverflow.com/questions/3710204/how-to-check-if-a-string-is-a-valid-json-string-in-javascript-without-using-try/3710226
+                            if (/^[\],:{}\s]*$/.test(data.posts.replace(/\\["\\\/bfnrtu]/g, '@').
+                                    replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+                                    replace(/(?:^|:|,)(?:\s*\[)+/g, '')))
+                            {
+                                var posts = JSON.parse(data.posts);
+                                if(posts.length > 0)
+                                {
+                                    var html = "";
+                                    for(d in posts)
+                                    {
+                                        html += "<p>" + JSON.stringify(posts[d]) + "</p>";
+                                    }
+                                    $("#containerPosts").append(html);
+                                }
+                            }
+                            else
+                            {
+                                console.log("INVALID JSON STRING");
+                            }
+                        }
+                        else
+                        {
+                            console.log("POSTS NOT FOUND");
+                        }
+                    }
+                },
+                error: function(jqXHR, exception)
+                {
+                    if(jqXHR.status === 405)
+                    {
+                        console.error("METHOD NOT ALLOWED!");
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
