@@ -7,9 +7,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
 
 /**
- * CategoriaFP
- *
- * @ORM\Table(name="categoria_fp")
+ * @ORM\Table(name="categoria") 
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoriaFPRepository")
  */
 class CategoriaFP
@@ -81,7 +79,6 @@ class CategoriaFP
      *
      * @param integer $parentId
      *
-     * @return CategoriaFP
      */
     public function setParentId($parentId)
     {
@@ -105,7 +102,6 @@ class CategoriaFP
      *
      * @param string $nombre
      *
-     * @return CategoriaFP
      */
     public function setNombre($nombre)
     {
@@ -129,7 +125,6 @@ class CategoriaFP
      *
      * @param string $img
      *
-     * @return CategoriaFP
      */
     public function setImg($img)
     {
@@ -169,7 +164,6 @@ class CategoriaFP
      *
      * @param \DateTime $createdAt
      *
-     * @return CategoriaFP
      */
     public function setCreatedAt($createdAt)
     {
@@ -193,7 +187,6 @@ class CategoriaFP
      *
      * @param \DateTime $updatedAt
      *
-     * @return CategoriaFP
      */
     public function setUpdatedAt($updatedAt)
     {

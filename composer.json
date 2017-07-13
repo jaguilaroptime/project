@@ -25,7 +25,9 @@
         "symfony/assetic-bundle": "^2.8",
         "knplabs/knp-paginator-bundle": "^2.5",
         "phpoffice/phpspreadsheet": "dev-master",
-        "mpdf/mpdf": "^6.1"
+        "mpdf/mpdf": "^6.1",
+        "sonata-project/admin-bundle": "^3.20",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
