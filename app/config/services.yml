@@ -4,6 +4,7 @@ parameters:
 #    parameter_name: value
 imports:
     - { resource: services/repositories.yml }
+    - { resource: services/admin.yml}
 
 services:
     app.message_generator:
@@ -17,6 +18,8 @@ services:
             class: AppBundle\Form\Extension\ImageTypeExtension
             tags:
                 - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }
+
+
 
     #app.exception_listener:
     #    class: AppBundle\EventListener\ExceptionListener
