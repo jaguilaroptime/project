@@ -137,5 +137,10 @@ class BlogPost
     {
         return $this->category;
     }
+
+    public function __toString()
+    {
+        return $this->getTitle() ?: '';
+    }
 }
 

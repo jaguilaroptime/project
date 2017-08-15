@@ -12,11 +12,19 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class BlogPostAdmin extends AbstractAdmin
 {
-    public $supportsPreviewMode = true;
+    //public $supportsPreviewMode = true;
+    protected $baseRoutePattern = 'post';
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        //$collection->remove('delete');
+        //$collection->clearExcept('list');
+    }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -30,16 +38,26 @@ class BlogPostAdmin extends AbstractAdmin
 
         ;*/
         $formMapper
-            ->with('Content', array('class' => 'col-md-9'))
+            ->with('Content', array(
+                'class' => 'col-md-8',
+                'description' => 'This section contains general settings for the web page'
+
+                ))
                 ->add('title', 'text')
                 ->add('body', 'textarea')
+                ->setHelps(array(
+                    'title' => 'Set the title of a web page'
+                ))
             ->end()
 
-            ->with('Meta data', array('class' => 'col-md-3'))
-                ->add('category', 'sonata_type_model', array(
+            ->with('Select Category', array('class' => 'col-md-4'))
+                /*->add('category', 'sonata_type_model', array(
                     'class' => 'AppBundle\Entity\Category',
                     'property' => 'name',
-            ))
+                ))*/
+                ->add('category', 'sonata_type_model', array(
+                    'property' => 'name'
+                ))
             ->end()
         ;
     }
@@ -47,7 +65,12 @@ class BlogPostAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title')
+            ->addIdentifier('title', null, array(
+                'route' => array(
+                        'name' => 'show'
+                    )
+                )
+            )
             ->add('body')
             ->add('category.name')
             //->add('draft', 'boolean')
@@ -101,9 +124,19 @@ class BlogPostAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title')
-            ->add('slug')
-            ->add('author')
+            ->with('Content', array(
+                'class' => 'col-md-8'
+                ))
+                ->add('title')
+                ->add('body')
+                ->add('draft', 'boolean')
+            ->end()
+
+            ->with('Category', array(
+                    'class' => 'col-md-4'
+                ))
+                ->add('category.name')
+            ->end()
         ;
     }
 
