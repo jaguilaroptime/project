@@ -32,3 +32,8 @@ monolog:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+remg_generator:
+    entity:
+        # available configuration formats are: 'annotation', 'yaml', 'xml' and 'php'.
+        configuration_format: annotation
